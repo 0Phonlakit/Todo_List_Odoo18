@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <!-- Root Menu -->
+    <record id="view_todo_list" model="ir.ui.view">
+        <field name="name">todo.list.view</field>
+        <field name="model">todo.list</field>
+        <field name="arch" type="xml">
+            <list>
+                <!-- List Field -->
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="tag_ids" widget="many2many_tags"/>
+            </list>
+        </field>
+    </record>
+</odoo>

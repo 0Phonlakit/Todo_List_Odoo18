@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <!-- Todo List From -->
+    <record id="view_form" model="ir.ui.view">
+        <field name="name">todo.list.form</field>
+        <field name="model">todo.list</field>
+        <field name="arch" type="xml">
+            <form string="Todo List">
+                <!-- Header Button and State -->
+                <header>
+                    <field name="state" widget="statusbar" readonly="1" statusbar_visible="draft,in_progress,complete"/>
+                    <button name="start_progress" type="object" string="Start Progress" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="end_progress" type="object" string="Done" class="oe_highlight" invisible="state != 'in_progress'"/>
+                </header>
+                <!-- Main Content -->
+                <sheet>
+                    <!-- List Fields -->
+                    <group>
+                        <group col="1"> 
+                            <field name="name" colspan="1" readonly="state == 'complete'"/>
+                        </group>
+                        <newline/>
+                        <group col="2"> 
+                            <field name="tag_ids" widget="many2many_tags" colspan="1" readonly="state == 'complete'"/>
+                        </group>
+                        <group col="3">
+                            <field name="start_date" widget="datetime" colspan="2" readonly="state == 'complete'"/>
+                            <field name="end_date" widget="datetime" colspan="2" readonly="state == 'complete'"/>
+                        </group>
+                    </group>
+                    <!-- Button Section -->
+                    <group invisible="state == 'draft'">
+                        <button name="show_tasks" type="object" string="List" class="oe_highlight"/>
+                        <button name="show_attendees" type="object" string="Attendees" class="oe_highlight"/>
+                    </group>
+                    <!-- Task Fields -->
+                    <group string="Todo List" invisible="state == 'draft' or button_section != 'tasks'">
+                        <field name="task_ids" nolabel="1" readonly="state == 'complete'">
+                            <list editable="bottom">
+                                <field name="name"/>
+                                <field name="description"/>
+                                <field name="is_done"/>
+                            </list>
+                        </field>
+                    </group>
+                    <!-- Attendee Fields -->
+                    <group string="Attendees" invisible="state == 'draft' or button_section != 'attendees'">
+                        <field name="participants_ids" nolabel="1">
+                            <list editable="bottom">  
+                                <field name="name" readonly="parent.state == 'complete'"/>
+                            </list>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

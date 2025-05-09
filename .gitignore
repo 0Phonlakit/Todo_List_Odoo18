@@ -1,0 +1,7 @@
+.vscode
+odoo
+venv
+odoo.conf
+
+custom-addons/todo_list/__pycache__
+custom-addons/todo_list/modules/__pycache__

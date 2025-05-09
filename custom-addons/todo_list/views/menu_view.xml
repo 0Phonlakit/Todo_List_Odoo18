@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <!-- Root Menu -->
+    <menuitem id="menu_todo_root" name="Todo List"/>
+
+    <!-- Action: All (Default Menu) -->
+    <record id="action_todo_list" model="ir.actions.act_window">
+        <field name="name">Todo List</field>
+        <field name="res_model">todo.list</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu: All (Default Action) -->
+    <menuitem id="menu_todo_list_all" name="All"
+              parent="menu_todo_root"
+              action="action_todo_list"
+              sequence="10"/>
+
+    <!-- Action: Uncomplete -->
+    <record id="action_todo_list_uncomplete" model="ir.actions.act_window">
+        <field name="name">Uncomplete Todo List</field>
+        <field name="res_model">todo.list</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '!=', 'complete')]</field>
+    </record>
+
+    <!-- Menu: Uncomplete -->
+    <menuitem id="menu_todo_list_uncomplete" name="Uncomplete"
+              parent="menu_todo_root"
+              action="action_todo_list_uncomplete"
+              sequence="20"/>
+
+    <!-- Action: Complete -->
+    <record id="action_todo_list_complete" model="ir.actions.act_window">
+        <field name="name">Complete Todo List</field>
+        <field name="res_model">todo.list</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'complete')]</field>
+    </record>
+
+    <!-- Menu: Complete -->
+    <menuitem id="menu_todo_list_complete" name="Complete"
+              parent="menu_todo_root"
+              action="action_todo_list_complete"
+              sequence="30"/>
+</odoo>
